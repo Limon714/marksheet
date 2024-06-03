@@ -11,7 +11,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->validateCsrfTokens(except: [
+             // <-- exclude this route
+            //  '/add-category',
+             '/delete-category/{id}',
+             '/update-category',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
