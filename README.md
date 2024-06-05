@@ -9,6 +9,13 @@
 
 ![WhatsApp Image 2024-06-05 at 21 52 20_166ad25f](https://github.com/Limon714/recepi-manager/assets/72975868/1ff50c1a-560d-4971-b0b1-ac92ef9f594b)
 
+![WhatsApp Image 2024-06-05 at 21 52 31_16c4d744](https://github.com/Limon714/recepi-manager/assets/72975868/a9a7e4de-1920-4ac8-bc56-964522aa09b2)
+
+
+![WhatsApp Image 2024-06-05 at 21 52 52_88035b5c](https://github.com/Limon714/recepi-manager/assets/72975868/d9bf44b8-fd0c-43a8-88e5-1bbf46c768d3)
+
+![WhatsApp Image 2024-06-05 at 21 53 14_41a68587](https://github.com/Limon714/recepi-manager/assets/72975868/227d0ccc-d8cf-4f80-b540-947bbb1c0fab)
+
 
 ## Learning Laravel
 
