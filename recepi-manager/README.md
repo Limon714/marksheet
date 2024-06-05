@@ -6,7 +6,8 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
-![Screenshot](screencapture-127-0-0-1-8000-recipeDetails-2024-06-05-22_02_01.png)
+![recipe_review](https://github.com/Limon714/recepi-manager/assets/145465516/16ba16f0-cda8-4206-a4b1-991751270d3b)
+
 
 ## About Laravel
 
