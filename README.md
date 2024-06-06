@@ -82,16 +82,3 @@ We hope you enjoy using the Food Lovers Website as much as we enjoyed creating i
 
 ---
 
-<a href="https://github.com/yourusername/food-lovers-website/stargazers">
-  <img src="https://img.shields.io/github/stars/yourusername/food-lovers-website" alt="GitHub stars">
-</a>
-<a href="https://github.com/yourusername/food-lovers-website/network">
-  <img src="https://img.shields.io/github/forks/yourusername/food-lovers-website" alt="GitHub forks">
-</a>
-<a href="https://github.com/yourusername/food-lovers-website/issues">
-  <img src="https://img.shields.io/github/issues/yourusername/food-lovers-website" alt="GitHub issues">
-</a>
-<a href="https://github.com/yourusername/food-lovers-website/blob/main/LICENSE">
-  <img src="https://img.shields.io/github/license/yourusername/food-lovers-website" alt="GitHub license">
-</a>
-```
