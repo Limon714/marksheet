@@ -7,19 +7,15 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+![WhatsApp Image 2024-06-05 at 21 52 20_166ad25f](https://github.com/Limon714/recepi-manager/assets/72975868/1ff50c1a-560d-4971-b0b1-ac92ef9f594b)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+![WhatsApp Image 2024-06-05 at 21 52 31_16c4d744](https://github.com/Limon714/recepi-manager/assets/72975868/a9a7e4de-1920-4ac8-bc56-964522aa09b2)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+![WhatsApp Image 2024-06-05 at 21 52 52_88035b5c](https://github.com/Limon714/recepi-manager/assets/72975868/d9bf44b8-fd0c-43a8-88e5-1bbf46c768d3)
+
+![WhatsApp Image 2024-06-05 at 21 53 14_41a68587](https://github.com/Limon714/recepi-manager/assets/72975868/227d0ccc-d8cf-4f80-b540-947bbb1c0fab)
+
 
 ## Learning Laravel
 
