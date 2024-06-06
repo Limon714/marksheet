@@ -18,7 +18,7 @@ return new class extends Migration
 
             $table->string('title');
             $table->text('ingredients');
-            $table->text('steps');
+            $table->longText('steps');
 
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

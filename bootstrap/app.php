@@ -13,7 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->validateCsrfTokens(except: [
              // <-- exclude this route
-            //  '/add-category',
+            '/add-recipe',
              '/delete-category/{id}',
              '/update-category',
         ]);
