@@ -1,12 +1,12 @@
-<!-- resources/views/categories/create.blade.php -->
+<!-- resources/views/subcategories/create.blade.php -->
 
 @extends('../layouts.app')
 
 @section('content')
     <div class="row mb-4">
         <div class="col-lg-12">
-            <h2>Create Category</h2>
-            <a class="btn btn-primary" href="{{ route('categories.index') }}">Back</a>
+            <h2>Create SubSubCategory</h2>
+            <a class="btn btn-primary" href="{{ url()->previous() }}">Back</a>
         </div>
     </div>
 
@@ -20,11 +20,20 @@
         </div>
     @endif
 
-    <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('subsubcategories.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" name="name" class="form-control" id="name">
+        </div>
+        <div class="form-group mt-2">
+            <label for="category_id">SubCategory:</label>
+            <select name="sub_category_id" class="form-control" id="sub_category_id">
+                <option value="">Select SubCategory</option>
+                @foreach ($subcategories as $subcategory)
+                    <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group mt-2">
             <label for="image">Image:</label>

@@ -1,4 +1,6 @@
-@extends('layouts.app')
+<!-- resources/views/categories/edit.blade.php -->
+
+@extends('../layouts.app')
 
 @section('content')
     <div class="row mb-4">
@@ -18,13 +20,21 @@
         </div>
     @endif
 
-    <form action="{{ route('categories.update', $category->id) }}" method="POST">
+    <form action="{{ route('categories.update', $category->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="form-group">
             <label for="name">Name:</label>
-            <input type="text" name="name" value="{{ $category->name }}" class="form-control" id="name" placeholder="Enter category name">
+            <input type="text" name="name" class="form-control" id="name" value="{{ $category->name }}">
         </div>
-        <button type="submit" class="btn btn-success">Submit</button>
+        <div class="form-group mt-2">
+            <label for="image">Image:</label>
+            <input type="file" name="image" class="form-control-file" id="image">
+            @if ($category->image)
+                <img src="{{ asset('images/' . $category->image) }}" alt="{{ $category->name }}" width="100">
+            @endif
+        </div>
+        <button type="submit" class="btn btn-success mt-2">Update</button>
     </form>
 @endsection
+
