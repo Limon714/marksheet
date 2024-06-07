@@ -17,21 +17,23 @@
 		  <div id="search-dish-call" class="font-medium text-2xl md:text-4xl text-center mb-6">Search Your Favorite Dish</div>
 		  <div class="bg-white p-3 shadow-sm rounded-sm">
 			  <!--Search bar-->
+			   <form action="{{ url('/search') }}" method="post" enctype="multipart/form-data">@csrf
 			  <div class="border rounded overflow-hidden flex mb-4">
-				<input id="home-dish-search-bar" type="text" class="w-11/12 px-4 py-2 border-gray-300 focus:ring-blue-600 font-regular" placeholder="What are you looking for?">
+				<input id="home-dish-search-bar" type="text" name="searchRecipe" class="w-11/12 px-4 py-2 border-gray-300 focus:ring-blue-600 font-regular" placeholder="What are you looking for?">
 				<div class="input-group-btn search-panel">
-					<select class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					<select class="btn btn-default dropdown-toggle" name="category_id" data-toggle="dropdown">
 						<option>All</option>
 						@foreach ($categories as $category)
-							<option>{{$category->name}}</option>
+							<option value="{{$category->id}}">{{$category->name}}</option>
 						@endforeach
 					</select>
 				</div>
 			
 				
-				<button class="flex w-1/12 items-center justify-center md:px-4 border-l">
+				<button type="submit" class="flex w-1/12 items-center justify-center md:px-4 border-l">
 				  <svg class="h-4 w-4 text-grey-dark" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"/></svg>
 				</button>
+				</form>
 			  </div>
 
 			  <!--Recent Posts-->
