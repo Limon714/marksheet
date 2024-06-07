@@ -1,4 +1,6 @@
 ![recipe_review_update_1](https://github.com/Limon714/recepi-manager/assets/145465516/75b62bab-8f8b-44c3-bed2-c34b3286ab9a)
+![recipe_review_update_with_pagination](https://github.com/Limon714/recepi-manager/assets/145465516/7870f190-8736-41a8-8131-1cc566f948ef)
+
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
