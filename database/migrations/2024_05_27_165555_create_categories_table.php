@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name')->length(100);
             $table->timestamps();
-            // $table->integer('parent_id')->nullable();
-            //$table->tinyInteger('status')->default(1)->comment("0 = Inactive, 1 = Active");
-            // $table->integer('created_by')->nullable();
-            // $table->integer('updated_by')->nullable();
+            $table->integer('parent_id')->nullable();
+            $table->tinyInteger('status')->default(1)->comment("0 = Inactive, 1 = Active");
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
         });
     }
 

@@ -22,10 +22,14 @@ return new class extends Migration
             $table->integer('protein');
             $table->integer('carbs');      
             
-            $table->integer('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('category_id');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')
+            ->restrictOnDelete()
+            ->cascadeOnUpdate();
+            $table->bigInteger('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('categories')
+            ->restrictOnDelete()
+            ->cascadeOnUpdate();
             $table->timestamps();
 
             //$table->tinyInteger('status')->default(1)->comment("0 = Inactive, 1 = Active");
