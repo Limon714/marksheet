@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('protein');
             $table->integer('carbs');
             $table->string('img_url');
+            $table->integer('no_of_likes')->default(0);
             $table->timestamps();
         });
     }

@@ -34,4 +34,8 @@ class Recipe extends Model {
     public function reviews() {
         return $this->hasMany( Review::class );
     }
+
+    public function likes(){
+        return $this->belongsToMany(User::class, 'likes');
+    }
 }

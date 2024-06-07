@@ -172,7 +172,9 @@
                     @foreach ($data as $item)
                         <div>
                             <img id="dish-page-image" class="object-scale-down h-96 w-auto"
-                                src='{{ $item->img_url }}' />
+                                src='{{ $item->img_url ? $item->img_url : 'https://placehold.co/600x400?text=image' }}'
+                                alt="image not found" />
+
                         </div>
                 </div>
                 <div class="mb-4 pt-5 px-6 max-w-xl md:max-w-5xl md:w-1/2" style="overflow:auto">
@@ -193,14 +195,11 @@
                             class="bg-red-500 text-gray-50 text-sm font-bold rounded-md px-2 py-1">{{ $item->category->name }}</span>
                     </div>
                     <div class="flex items-center">
-                        @php
-                            $rating = $item->reviews->avg('rating');
-                        @endphp
 
                         <span class="font-medium mr-2">Ratings: </span>
                         <div class="flex">
                             @for ($i = 1; $i <= 5; $i++)
-                                @if ($i <= $rating)
+                                @if ($i <= $average)
                                     <span>
                                         <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true"
                                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
@@ -222,20 +221,84 @@
                             {{ $item->ingredients }}
                         </p>
                     </div>
-                    @endforeach
+
                     <div class="mt-8">
                         <div class="flex flex-row">
-                            <span class="font-medium mr-4">Likes: </span>
-                            <svg id="dish-page-like-btn" onClick="toggleLikeButton(this)" class="w-6 h-6 cursor-pointer"
-                                fill="#FFFFFF" stroke="#EC4899" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
-                                </path>
-                            </svg>
-                            <span id="dish-page-num-likes" class="ml-2">0</span>
+                            <div class="flex items-center">
+                                <div class="mr-10">
+
+                                    <form action="{{ url('/postLike') }}" method="post">
+                                        @csrf
+                                        @if ($liked)
+                                            <div>
+                                                <p class="font-medium mr-4 text-green-600"> <span
+                                                        class="w-10 h-10 px-2 py-1 rounded-full ring-2 ring-green-600 dark:ring-green-600 font-bold mr-2">&#10003</span>Already
+                                                    Liked </p>
+                                            </div>
+                                        @else
+                                            <span class="font-medium mr-2">Like This Recipe:</span>
+                                            <input type="hidden" name="like">
+                                            <button type="submit"
+                                                class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
+                                                <svg class="w-4 h-4" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                    viewBox="0 0 18 18">
+                                                    <path
+                                                        d="M3 7H1a1 1 0 0 0-1 1v8a2 2 0 0 0 4 0V8a1 1 0 0 0-1-1Zm12.954 0H12l1.558-4.5a1.778 1.778 0 0 0-3.331-1.06A24.859 24.859 0 0 1 6 6.8v9.586h.114C8.223 16.969 11.015 18 13.6 18c1.4 0 1.592-.526 1.88-1.317l2.354-7A2 2 0 0 0 15.954 7Z" />
+                                                </svg>
+                                                <span class="sr-only">Icon description</span>
+                                            </button>
+                                        @endif
+                                    </form>
+
+                                </div>
+
+                                <div>
+                                    <p class="font-medium mr-4">People Likes: </p>
+                                </div>
+                                <svg id="dish-page-like-btn" class="w-6 h-6 cursor-pointer" fill="#FFFFFF"
+                                    stroke="#EC4899" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                                    </path>
+                                </svg>
+                                <span id="dish-page-num-likes" class="ml-2">
+                                    {{ $item->no_of_likes >= 0 ? $item->no_of_likes : 0 }} </span>
+                            </div>
+
+
+
+
+
                             <!-- <svg class="w-6 h-6 stroke-current text-pink-500 fill-current text-white" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg> -->
                         </div>
                     </div>
+                    @endforeach
+                    @if (session('likeError'))
+                        <div class="p-2 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                            role="alert">
+                            <span class="font-medium">{{ session('likeError') }}</span>
+                        </div>
+                    @endif
+                    @if (session('liked'))
+                        <div class="p-2 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                            role="alert">
+                            <span class="font-medium">{{ session('liked') }}</span>
+                        </div>
+                    @endif
+                    @if (session('notliked'))
+                        <div class="p-2 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                            role="alert">
+                            <span class="font-medium">{{ session('notliked') }}</span>
+                        </div>
+                    @endif
+                    @if (session('submitLike'))
+                        <div class="p-2 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                            role="alert">
+                            <span class="font-medium">{{ session('submitLike') }}</span>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -300,7 +363,7 @@
 
     <!--Comments-->
     <div class="py-5 flex justify-center">
-        <div class="w-11/12 md:w-7/10 md:mx-8 md:flex md:max-w-5xl shadow-lg rounded-lg">
+        <div class="w-11/12 md:w-7/10 md:mx-8 flex flex-col md:max-w-5xl shadow-lg rounded-lg bg-green-100">
             <form action="{{ url('/postComment') }}" method="post" class="w-full bg-white rounded-lg px-4 pt-2">
                 @csrf
                 <div class="flex flex-wrap -mx-3 mb-6">
@@ -308,8 +371,37 @@
                     <div class="w-full md:w-full px-3 mb-2 mt-2">
                         <textarea id="dish-new-comment-text"
                             class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-regular placeholder-gray-700 focus:outline-none focus:bg-white"
-                            name="comment" placeholder='Type Your Comment' required></textarea>
+                            name="comment" placeholder='Type Your Comment'></textarea>
+                        @if ($errors->any())
+                            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                                role="alert">
+                                @foreach ($errors->all() as $error)
+                                    <span class="font-medium">{{ $error }}</span>
+                            </div>
+                        @endforeach
+
+                        @endif
+
+                        @if (session('success'))
+                            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                                role="alert">
+                                <span class="font-medium">{{ session('success') }}</span>
+                            </div>
+                        @endif
+                        @if (session('loginError'))
+                            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                                role="alert">
+                                <span class="font-medium">{{ session('loginError') }}</span>
+                            </div>
+                        @endif
                     </div>
+
+
+
+
+
+
+
 
                     <div class="px-4 mb-6 flex gap-x-4">
                         <div class="max-w-sm mx-auto">
@@ -340,6 +432,8 @@
                                 value='Post Comment'>
                         </div>
                     </div>
+                </div>
+
             </form>
 
             <!--Previously added comments-->
@@ -349,49 +443,60 @@
                 <p class="text-gray-800 text-lg font-medium px-4">All Reviews</p>
             </div>
             <div id="dish-comments" class="w-full px-4 pt-2 pb-2 mt-4">
-                <div class="flex flex-row w-full p-2">
-                    <div class="ml-2">
-                        @foreach ($item->reviews as $item)
-                            <div class="flex mb-8">
-                                <div class="mr-2">
-                                    <img class="w-14 md:w-20 h-14 md:h-20 mr-2 object-cover rounded-full cursor-pointer"
-                                        src="{{ asset('images/default-profile.jpeg') }}" />
-                                </div>
+                <div class="flex flex-col w-full p-2">
+                    <div class="ml-2 flex flex-col">
+                        @if ($comments === '')
+                            <p id="dish-no-comments"
+                                class="mx-auto text-center text-sm font-medium text-black bg-blue-400 p-2 w-full">No
+                                Comments
+                            </p>
+                        @else
+                            @foreach ($comments as $comment)
+                                <div class="flex mb-8 p-2 bg-white">
+                                    <div class="mr-2">
+                                        <img class="w-14 md:w-20 h-14 md:h-20 mr-2 object-cover rounded-full cursor-pointer"
+                                            src="{{ asset('images/default-profile.jpeg') }}" />
+                                    </div>
 
-                                <div>
                                     <div>
-                                        <h2 class="text-gray-800 text-lg font-medium mb-1 cursor-pointer">John Doe</h2>
-                                    </div>
-                                    <div class="flex mb-2">
-                                        @for ($i = 1; $i <= 5; $i++)
-                                            @if ($i <= $item->rating)
-                                                <span>
-                                                    <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                        viewBox="0 0 22 20">
-                                                        <path
-                                                            d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                                    </svg>
-                                                </span>
-                                            @else
-                                                <span class="fa fa-star"></span>
-                                            @endif
-                                        @endfor
-                                    </div>
-                                    <div>
-                                        <p class="font-regular text-gray-600">
-                                            {{ $item->comment }}
-                                        </p>
+                                        <div>
+                                            <h2 class="text-gray-800 text-lg font-medium mb-1 cursor-pointer">
+                                                {{ $comment->user->name }}
+                                            </h2>
+                                        </div>
+                                        <div class="flex mb-2">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @if ($i <= $comment->rating)
+                                                    <span>
+                                                        <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true"
+                                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                            viewBox="0 0 22 20">
+                                                            <path
+                                                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                        </svg>
+                                                    </span>
+                                                @else
+                                                    <span class="fa fa-star"></span>
+                                                @endif
+                                            @endfor
+                                        </div>
+                                        <div>
+                                            <p class="max-w-4xl">{{ $comment->comment }}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+
+                            <div>{{ $comments->links() ? $comments->links() : '' }}</div>
+
+                        @endif
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
-    </div>
+
 
     <!-- Foooter -->
     <section class="bg-blue-600">

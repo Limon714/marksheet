@@ -13,27 +13,19 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('categories')->insert([
-            [
-                'name' => 'Main Course',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'Salad',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'Dessert',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'Appetizer',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ]);
+        $categories = [
+            ['name' => 'Appetizers', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Main Dishes', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Desserts', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Salads', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Soups', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Beverages', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Breakfast', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Side Dishes', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Snacks', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Sauces', 'created_at' => now(), 'updated_at' => now()],
+        ];
+
+        DB::table('categories')->insert($categories);
     }
 }
