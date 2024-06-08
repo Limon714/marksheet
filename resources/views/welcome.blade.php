@@ -22,7 +22,7 @@
 				<input id="home-dish-search-bar" type="text" name="searchRecipe" class="w-11/12 px-4 py-2 border-gray-300 focus:ring-blue-600 font-regular" placeholder="What are you looking for?">
 				<div class="input-group-btn search-panel">
 					<select class="btn btn-default dropdown-toggle" name="category_id" data-toggle="dropdown">
-						<option>All</option>
+						<option value="">All</option>
 						@foreach ($categories as $category)
 							<option value="{{$category->id}}">{{$category->name}}</option>
 						@endforeach
@@ -41,7 +41,7 @@
 			  <div id="home-posts" class="grid grid-cols-1 md:grid-cols-4 gap-3">
 				@foreach ($recipes as $recipe)
 			 	<div class="card">
-					<img class="card-img-top" src="{{asset("assets/frontend/images/ashutosh.jpeg")}}" alt="Card image cap">
+					<img class="card-img-top" src="{{asset("assets/frontend/images/hero-dish.png")}}" alt="Card image cap">
 					<div class="card-body">
 					<h5 class="card-title">{{$recipe->title}}</h5>
 					<p class="card-text">{{ Str::limit($recipe->steps, 100) }}</p>
